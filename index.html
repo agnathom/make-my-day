@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Meu Dia">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Meu Dia</title>
+</head>
+<body>
+  <main>
+    <!-- TELA: HOJE -->
+    <section id="view-hoje" class="view active">
+      <p class="data" id="dataHoje"></p>
+
+      <div class="saldo-card" id="saldoCard">
+        <span class="saldo-label">Saldo de hoje</span>
+        <span class="saldo-valor" id="saldoHoje">R$ 0,00</span>
+        <div class="saldo-detalhe">
+          <span class="entrou">▲ Entrou <b id="totalGanho">R$ 0,00</b></span>
+          <span class="saiu">▼ Saiu <b id="totalGasto">R$ 0,00</b></span>
+        </div>
+      </div>
+
+      <form id="form" autocomplete="off">
+        <input id="valor" type="text" inputmode="decimal" placeholder="Valor (ex: 15 ou 15,50)" required>
+        <input id="desc" type="text" placeholder="O que foi? (ex: café da manhã)">
+        <div class="botoes">
+          <button type="submit" data-tipo="gasto" class="btn gasto">− Gastei</button>
+          <button type="submit" data-tipo="ganho" class="btn ganho">+ Ganhei</button>
+        </div>
+      </form>
+
+      <h2>Lançamentos de hoje</h2>
+      <ul id="lista" class="lista"></ul>
+      <p id="vazio" class="vazio">Nenhum lançamento ainda. Seu dia começa em R$ 0,00.</p>
+    </section>
+
+    <!-- TELA: RELATÓRIOS -->
+    <section id="view-relatorios" class="view">
+      <div class="periodos" id="periodos">
+        <button data-p="hoje">Hoje</button>
+        <button data-p="7" class="on">7 dias</button>
+        <button data-p="mes">Mês</button>
+        <button data-p="tudo">Tudo</button>
+      </div>
+
+      <div class="resumo">
+        <div><span>Ganhos</span><b id="rGanho" class="entrou">R$ 0,00</b></div>
+        <div><span>Gastos</span><b id="rGasto" class="saiu">R$ 0,00</b></div>
+        <div><span>Resultado</span><b id="rSaldo">R$ 0,00</b></div>
+      </div>
+
+      <h2>Para onde foi o dinheiro</h2>
+      <div id="rCatGasto"></div>
+
+      <h2>De onde veio o dinheiro</h2>
+      <div id="rCatGanho"></div>
+
+      <h2>Dia a dia</h2>
+      <ul id="rDias" class="lista"></ul>
+
+      <h2>Backup</h2>
+      <div class="botoes">
+        <button class="btn neutro" id="exportar">Exportar dados</button>
+        <label class="btn neutro" for="importar">Importar</label>
+        <input id="importar" type="file" accept="application/json" hidden>
+      </div>
+      <p class="nota">Os dados ficam só neste aparelho. Exporte de vez em quando para não perder.</p>
+    </section>
+  </main>
+
+  <nav>
+    <button data-view="hoje" class="on">Hoje</button>
+    <button data-view="relatorios">Relatórios</button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --texto: #f1f5f9;
+  --suave: #94a3b8;
+  --verde: #22c55e;
+  --vermelho: #ef4444;
+  --borda: #334155;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--bg); color: var(--texto);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 520px; margin: 0 auto; padding: calc(env(safe-area-inset-top) + 16px) 16px 110px; }
+.view { display: none; }
+.view.active { display: block; }
+h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--suave); margin: 28px 0 10px; }
+.data { color: var(--suave); margin: 0 0 12px; text-transform: capitalize; }
+
+.saldo-card { background: var(--card); border-radius: 24px; padding: 28px 20px; text-align: center;
+  border: 2px solid var(--borda); transition: border-color .2s; }
+.saldo-card.positivo { border-color: var(--verde); }
+.saldo-card.negativo { border-color: var(--vermelho); }
+.saldo-label { display: block; color: var(--suave); font-size: 15px; }
+.saldo-valor { display: block; font-size: 52px; font-weight: 800; margin: 6px 0 14px; letter-spacing: -1px; }
+.positivo .saldo-valor, .entrou { color: var(--verde); }
+.negativo .saldo-valor, .saiu { color: var(--vermelho); }
+.saldo-detalhe { display: flex; justify-content: space-around; font-size: 14px; }
+
+form { margin-top: 16px; display: grid; gap: 10px; }
+input[type=text] { width: 100%; padding: 16px; font-size: 18px; border-radius: 14px;
+  border: 1px solid var(--borda); background: var(--card); color: var(--texto); }
+input::placeholder { color: var(--suave); }
+.botoes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn { border: 0; border-radius: 14px; padding: 16px; font-size: 18px; font-weight: 700; color: #fff;
+  text-align: center; cursor: pointer; }
+.btn.gasto { background: var(--vermelho); }
+.btn.ganho { background: var(--verde); color: #052e16; }
+.btn.neutro { background: var(--card); border: 1px solid var(--borda); font-size: 15px; }
+.btn:active { transform: scale(.97); }
+
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.item { background: var(--card); border-radius: 14px; padding: 12px 14px; display: grid;
+  grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; }
+.item .desc { font-weight: 600; }
+.item .v { font-weight: 800; font-size: 17px; text-align: right; }
+.item .meta { display: flex; gap: 8px; align-items: center; color: var(--suave); font-size: 12px; }
+.item select { background: var(--bg); color: var(--suave); border: 1px solid var(--borda);
+  border-radius: 8px; padding: 3px 6px; font-size: 12px; }
+.item .del { background: none; border: 0; color: var(--suave); font-size: 13px; text-align: right; padding: 0; }
+.vazio { color: var(--suave); text-align: center; }
+.nota { color: var(--suave); font-size: 12px; }
+
+.periodos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.periodos button { background: var(--card); color: var(--suave); border: 1px solid var(--borda);
+  border-radius: 10px; padding: 10px 0; font-size: 14px; }
+.periodos button.on { background: var(--texto); color: var(--bg); font-weight: 700; }
+.resumo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.resumo div { background: var(--card); border-radius: 14px; padding: 12px 8px; text-align: center; }
+.resumo span { display: block; color: var(--suave); font-size: 12px; }
+.resumo b { font-size: 15px; }
+
+.barra { margin-bottom: 10px; }
+.barra .topo { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px; }
+.barra .fundo { background: var(--card); border-radius: 8px; height: 10px; overflow: hidden; }
+.barra .cheio { height: 100%; border-radius: 8px; }
+.barra .cheio.g { background: var(--vermelho); }
+.barra .cheio.r { background: var(--verde); }
+
+nav { position: fixed; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: 1fr 1fr;
+  background: var(--card); border-top: 1px solid var(--borda); padding-bottom: env(safe-area-inset-bottom); }
+nav button { background: none; border: 0; color: var(--suave); font-size: 16px; padding: 16px 0; font-weight: 600; }
+nav button.on { color: var(--texto); }
