@@ -3,82 +3,114 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Meu Dia">
+  <meta name="apple-mobile-web-app-title" content="Make My Day">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>Meu Dia</title>
+  <title>Make My Day</title>
 </head>
 <body>
-  <main>
-    <!-- TELA: HOJE -->
-    <section id="view-hoje" class="view active">
-      <p class="data" id="dataHoje"></p>
+  <div id="tela-app" class="tela on">
+    <main>
 
-      <div class="saldo-card" id="saldoCard">
-        <span class="saldo-label">Saldo de hoje</span>
-        <span class="saldo-valor" id="saldoHoje">R$ 0,00</span>
-        <div class="saldo-detalhe">
-          <span class="entrou">▲ Entrou <b id="totalGanho">R$ 0,00</b></span>
-          <span class="saiu">▼ Saiu <b id="totalGasto">R$ 0,00</b></span>
+      <!-- HOJE -->
+      <section id="view-hoje" class="view on">
+        <div class="top"><span>hoje →</span><span class="mono mu" id="dataHoje"></span></div>
+
+        <div class="capa" id="capa">
+          <div id="capaArte"></div>
+          <span class="spk s1" id="spk1"></span>
+          <span class="spk s2" id="spk2"></span>
+          <span class="spk s3" id="spk3"></span>
+          <button class="olho" id="olho" aria-label="ocultar ou mostrar valores"></button>
         </div>
-      </div>
 
-      <form id="form" autocomplete="off">
-        <input id="valor" type="text" inputmode="decimal" placeholder="Valor (ex: 15 ou 15,50)" required>
-        <input id="desc" type="text" placeholder="O que foi? (ex: café da manhã)">
-        <div class="botoes">
-          <button type="submit" data-tipo="gasto" class="btn gasto">− Gastei</button>
-          <button type="submit" data-tipo="ganho" class="btn ganho">+ Ganhei</button>
+        <div class="visor">
+          <i class="mono">rendimento do dia</i>
+          <b id="saldoHoje">R$ 0,00</b>
         </div>
-      </form>
+        <div class="chips">
+          <span><em class="pos">↑</em> entrou <b id="totalGanho">R$ 0,00</b></span>
+          <span><em class="neg">↓</em> saiu <b id="totalGasto">R$ 0,00</b></span>
+        </div>
 
-      <h2>Lançamentos de hoje</h2>
-      <ul id="lista" class="lista"></ul>
-      <p id="vazio" class="vazio">Nenhum lançamento ainda. Seu dia começa em R$ 0,00.</p>
-    </section>
+        <form id="form" autocomplete="off">
+          <input id="valor" type="text" inputmode="decimal" placeholder="valor (ex: 15 ou 15,50)">
+          <input id="desc" type="text" placeholder="em quê? (ex: café da manhã)" maxlength="120">
+          <div class="duo">
+            <button type="button" class="btn" id="btnGasto">− gastei</button>
+            <button type="button" class="btn" id="btnGanho">+ ganhei</button>
+          </div>
+        </form>
+        <p class="erro" id="erroLanc" role="alert"></p>
 
-    <!-- TELA: RELATÓRIOS -->
-    <section id="view-relatorios" class="view">
-      <div class="periodos" id="periodos">
-        <button data-p="hoje">Hoje</button>
-        <button data-p="7" class="on">7 dias</button>
-        <button data-p="mes">Mês</button>
-        <button data-p="tudo">Tudo</button>
-      </div>
+        <div class="tagrow">
+          <span class="tag mono">@makemyday</span>
+          <button class="mini" id="trocarCapa">trocar capa</button>
+        </div>
 
-      <div class="resumo">
-        <div><span>Ganhos</span><b id="rGanho" class="entrou">R$ 0,00</b></div>
-        <div><span>Gastos</span><b id="rGasto" class="saiu">R$ 0,00</b></div>
-        <div><span>Resultado</span><b id="rSaldo">R$ 0,00</b></div>
-      </div>
+        <h2>lançamentos de hoje →</h2>
+        <ul id="lista" class="lista"></ul>
+        <div id="vazio" class="vazio">
+          <div class="vz" id="vazioArte"></div>
+          <p class="mono">nenhum lançamento ainda. seu dia começa em R$ 0,00.</p>
+        </div>
+      </section>
 
-      <h2>Para onde foi o dinheiro</h2>
-      <div id="rCatGasto"></div>
+      <!-- RELATÓRIOS -->
+      <section id="view-relatorios" class="view">
+        <div class="top"><span>relatórios →</span><span class="mono mu">@makemyday</span></div>
+        <div class="burst" id="burst"></div>
 
-      <h2>De onde veio o dinheiro</h2>
-      <div id="rCatGanho"></div>
+        <div class="seg" id="periodos">
+          <button data-p="hoje">hoje</button>
+          <button data-p="7" class="a">7 dias</button>
+          <button data-p="mes">mês</button>
+          <button data-p="tudo">tudo</button>
+        </div>
 
-      <h2>Dia a dia</h2>
-      <ul id="rDias" class="lista"></ul>
+        <div class="tiles">
+          <div><small class="mono">ganhos</small><b id="rGanho">R$ 0</b></div>
+          <div><small class="mono">gastos</small><b id="rGasto">R$ 0</b></div>
+          <div><small class="mono">resultado</small><b id="rSaldo">R$ 0</b></div>
+        </div>
 
-      <h2>Backup</h2>
-      <div class="botoes">
-        <button class="btn neutro" id="exportar">Exportar dados</button>
-        <label class="btn neutro" for="importar">Importar</label>
-        <input id="importar" type="file" accept="application/json" hidden>
-      </div>
-      <p class="nota">Os dados ficam só neste aparelho. Exporte de vez em quando para não perder.</p>
-    </section>
-  </main>
+        <h2>para onde foi o dinheiro →</h2>
+        <div id="rCatGasto"></div>
 
-  <nav>
-    <button data-view="hoje" class="on">Hoje</button>
-    <button data-view="relatorios">Relatórios</button>
-  </nav>
+        <h2>de onde veio o dinheiro →</h2>
+        <div id="rCatGanho"></div>
+
+        <h2>dia a dia →</h2>
+        <div id="rCols"></div>
+        <div class="leg mono"><span><i class="lg g"></i> ganhos</span><span><i class="lg o"></i> gastos</span></div>
+        <ul id="rDias" class="lista"></ul>
+
+        <h2>backup →</h2>
+        <div class="duo">
+          <button class="btn" id="exportar">exportar dados</button>
+          <label class="btn" for="importar">importar</label>
+          <input id="importar" type="file" accept="application/json" hidden>
+        </div>
+        <p class="nota mono">os dados ficam só neste aparelho. exporte de vez em quando para não perder.</p>
+      </section>
+    </main>
+
+    <nav id="tabs">
+      <button data-view="hoje" class="on">hoje</button>
+      <button data-view="relatorios">relatórios</button>
+    </nav>
+
+    <div id="toast" class="toast mono" role="status"></div>
+  </div>
 
   <script src="app.js"></script>
 </body>
